@@ -17,8 +17,8 @@ const Details = () => {
 
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
+      <div className="flex justify-center items-center p-4">
+        <h2 className="animate-spin text-8xl">🌀</h2>
       </div>
     );
   }
@@ -26,16 +26,23 @@ const Details = () => {
   const pet = results.data.pets[0];
 
   return (
-    <div className="details">
+    <div className="my-0 mx-auto mb-6 p-4 w-11/12 bg-gray-200 rounded-md shadow-md">
       <Carousel images={pet.images} />
       <div>
-        <h1>{pet.name}</h1>
-        <h2>{`${pet.animal} — ${pet.breed} — ${pet.city}, ${pet.state}`}</h2>
-        <button onClick={() => setShowModal(true)}>Adopt {pet.name}</button>
-        <p>{pet.description}</p>
+        <h1 className="text-center text-gray-600 text-6xl my-1 mx-0">
+          {pet.name}
+        </h1>
+        <h2 className="text-center mt-1 mb-5 my-0">{`${pet.animal} — ${pet.breed} — ${pet.city}, ${pet.state}`}</h2>
+        <button
+          onClick={() => setShowModal(true)}
+          className="rounded mx-auto px-6 py-2 color text-white hover:opacity-50 border-none bg-orange-500"
+        >
+          Adopt {pet.name}
+        </button>
+        <p className="px-15 py-0">{pet.description}</p>
         {showModal ? (
           <Modal>
-            <div>
+            <div className="max-w-lg p-4 text-center bg-gray-200 rounded-3xl">
               <h1>Would you like to adopt {pet.name}?</h1>
               <div className="buttons">
                 <button
@@ -43,10 +50,16 @@ const Details = () => {
                     setAdoptedPet(pet);
                     navigate("/");
                   }}
+                  className="inline-block rounded mr-4 px-6 py-2 color text-white hover:opacity-50 border-none bg-orange-500"
                 >
                   Yes
                 </button>
-                <button onClick={() => setShowModal(false)}>No</button>
+                <button
+                  className="inline-block rounded mr-4 px-6 py-2 color text-white hover:opacity-50 border-none bg-orange-500"
+                  onClick={() => setShowModal(false)}
+                >
+                  No
+                </button>
               </div>
             </div>
           </Modal>
